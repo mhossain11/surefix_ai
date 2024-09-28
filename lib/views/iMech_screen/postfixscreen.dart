@@ -11,6 +11,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
+import 'package:surefix_ai/controller/postfix_controller.dart';
 import 'package:surefix_ai/models/registrationNumberModel.dart';
 import 'package:provider/provider.dart';
 import '../../controller/request_controller.dart';
@@ -68,8 +69,8 @@ class _PostFixScreenState extends State<PostFixScreen> {
   final List<FaultCodeData> dataCode =[];
   late DatabaseHelper? dbHelper;
   var data='';
-  late RequestController requestController;
-  late RequestController requestControllerVar;
+  late PostFixController postFixRequestController;
+  late PostFixController postFixRequestControllerVar;
   File? documentsImage;
   bool isVisible = false;
   String? userSelected ='';
@@ -85,10 +86,10 @@ class _PostFixScreenState extends State<PostFixScreen> {
         dataCode.add(item);
       }
 
-      requestController.clear();
+      postFixRequestController.clear();
       setState(() {
       //  titleController.selection = TextSelection.fromPosition(TextPosition(offset: titleController.text.length));
-        requestController.loading =false;
+        postFixRequestController.loading =false;
 
       });
       // documentController.getChatGPTData(
@@ -101,10 +102,10 @@ class _PostFixScreenState extends State<PostFixScreen> {
 
   @override
   void didChangeDependencies() {
-    requestController =
-        Provider.of<RequestController>(context, listen: false);
-    requestControllerVar =
-        Provider.of<RequestController>(context, listen: true);
+    postFixRequestController =
+        Provider.of<PostFixController>(context, listen: false);
+    postFixRequestControllerVar =
+        Provider.of<PostFixController>(context, listen: true);
     super.didChangeDependencies();
 
 
@@ -112,8 +113,6 @@ class _PostFixScreenState extends State<PostFixScreen> {
 
   @override
   void dispose() {
-    requestController.clear();
-    requestControllerVar.clear();
     registrationController.dispose();
     usernameController.dispose();
     descriptionController.dispose();
@@ -122,6 +121,8 @@ class _PostFixScreenState extends State<PostFixScreen> {
     modelController.dispose();
     yearController.dispose();
     faultController.dispose();
+    fixTitleController.dispose();
+    fixDescriptionController.dispose();
     super.dispose();
   }
 
@@ -212,7 +213,7 @@ class _PostFixScreenState extends State<PostFixScreen> {
             sides: 2,
               color: Colors.white,
               onPressed: () {
-                requestController.selectFile();
+                postFixRequestController.selectFile();
               },
 
               child: const Padding(
@@ -236,17 +237,17 @@ class _PostFixScreenState extends State<PostFixScreen> {
           children: [
             SizedBox(
               width: 220,
-              child: requestControllerVar.documentsImage != null?
+              child: postFixRequestControllerVar.documentsImage != null?
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("File: ${requestControllerVar.documentsImage?.path.toString().split("/")[requestControllerVar.documentsImage!.path.toString().split("/").length-1]} Addd.",overflow: TextOverflow.ellipsis,),
+                child: Text("File: ${postFixRequestControllerVar.documentsImage?.path.toString().split("/")[postFixRequestControllerVar.documentsImage!.path.toString().split("/").length-1]} Addd.",overflow: TextOverflow.ellipsis,),
               ):Container(),
             ),
             Visibility(
-              visible: requestControllerVar.documentsImage != null,
+              visible: postFixRequestControllerVar.documentsImage != null,
               child: IconButton(onPressed: (){
                setState(() {
-                 requestControllerVar.deleteImage();
+                 postFixRequestControllerVar.deleteImage();
                });
               }, icon: const Icon(Icons.clear,color: Colors.grey)),
             )
@@ -265,7 +266,7 @@ class _PostFixScreenState extends State<PostFixScreen> {
               onPressed: () {
                 if (_formKey.currentState!.validate() ) {
 
-                    /*requestController.getChatGPTData(context: context,
+                  postFixRequestController.getChatGPTData(context: context,
                       registrationController:registrationController,
                       usernameController: usernameController,
                       descriptionController: descriptionController,
@@ -273,8 +274,11 @@ class _PostFixScreenState extends State<PostFixScreen> {
                       makeController: makeController,
                       modelController: modelController,
                       yearController: yearController,
-                      faultController:faultController,
-                      dropdownValue: typeAheadController,);*/
+                      faultController:typeAheadController,
+                    fixDescriptionController: fixDescriptionController,
+                    fixTitleController: fixTitleController
+
+                  );
 
 
 
@@ -299,7 +303,7 @@ class _PostFixScreenState extends State<PostFixScreen> {
 
               color: themeColor,
 
-              child: requestController.loading == false ?
+              child: postFixRequestController.loading == false ?
               const Center(
                 child:  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -764,7 +768,7 @@ class _PostFixScreenState extends State<PostFixScreen> {
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text('New Post',overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.white),),
+        title: const Text('Post a Fix',overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.white),),
         centerTitle: true,
         backgroundColor: themeColor,
         leading:IconButton(
@@ -830,9 +834,10 @@ class _PostFixScreenState extends State<PostFixScreen> {
         onChanged: (String? newValue){
           setState(() {
             dropdownValue = newValue!;
+            faultController.text = dropdownValue;
             int index = int.parse(newValue);
             titleController.text =  dataCode[index].title.toString();
-
+            print(faultController.text);
             print(dataCode.length);
             print(titleController.text.toString());
           });

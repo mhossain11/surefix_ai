@@ -19,6 +19,7 @@ class ApiEnd {
  // static String imechUserRegistationUrl ='/api/register';
   //static String imechRequestUpdateUrlfull ='https://surefix_ai.techvaultltd.com/updateRequest/64';
   static String imechCreateRequestUrlfull ='$baseUrl/savePost';
+  static String PostFixRequestUrlfull ='$baseUrl/postFix';
   static String allpostsurl='$baseUrl/allposts';
   static String ownpostsurl='$baseUrl/ownposts';
   static String usernamelist ='$baseUrl/regiCheckUser';

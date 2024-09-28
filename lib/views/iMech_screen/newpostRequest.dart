@@ -269,8 +269,7 @@ class _NewPostRequestState extends State<NewPostRequest> {
                       makeController: makeController,
                       modelController: modelController,
                       yearController: yearController,
-                      faultController:faultController,
-                      dropdownValue: typeAheadController,);
+                      faultController:typeAheadController,);
 
 
 
@@ -524,13 +523,13 @@ class _NewPostRequestState extends State<NewPostRequest> {
                 child: TypeAheadField(
                   controller: typeAheadController,
                   suggestionsCallback: (search) {
-                   var a= dataCode.where((item)=>item.faultCode!.toLowerCase().contains(search.toLowerCase())).toList();
-                   return a;
+                    var a= dataCode.where((item)=>item.faultCode!.toLowerCase().contains(search.toLowerCase())).toList();
+                    return a;
                   },
 
                   builder: (context, controller, focusNode) {
                     return TextField(
-                      scrollPhysics: const BouncingScrollPhysics(),
+                        scrollPhysics: const BouncingScrollPhysics(),
                         controller: controller,
                         focusNode: focusNode,
                         autofocus: false,
@@ -544,9 +543,9 @@ class _NewPostRequestState extends State<NewPostRequest> {
                   itemBuilder: (context, item) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(),
-                        shape: BoxShape.rectangle
+                          color: Colors.white,
+                          border: Border.all(),
+                          shape: BoxShape.rectangle
                       ),
                       width: 350,
                       height: 50,
@@ -560,22 +559,22 @@ class _NewPostRequestState extends State<NewPostRequest> {
                     );
                   },
                   autoFlipDirection: false,
-                onSelected: (FaultCodeData value) {
-                  setState(() {
-                    typeAheadController.text = value.faultCode.toString();
-                    int index = int.parse(value.id.toString());
-                    print('typeAheadController:${typeAheadController.text}');
-                    if(typeAheadController.text.isEmpty){
-                      titleController.clear();
-                    }else{
-                      print(index.toString());
-                      titleController.text =  dataCode[index].title.toString();
-                      print(dataCode[index].title.toString());
-                    }
+                  onSelected: (FaultCodeData value) {
+                    setState(() {
+                      typeAheadController.text = value.faultCode.toString();
+                      int index = int.parse(value.id.toString());
+                      print('typeAheadController:${typeAheadController.text}');
+                      if(typeAheadController.text.isEmpty){
+                        titleController.clear();
+                      }else{
+                        print(index.toString());
+                        titleController.text =  dataCode[index].title.toString();
+                        print(dataCode[index].title.toString());
+                      }
 
 
-                  });
-                },
+                    });
+                  },
 
 
 
@@ -700,6 +699,8 @@ class _NewPostRequestState extends State<NewPostRequest> {
   @override
   Widget build(BuildContext context) {
     ProjectResource.setScreenSize(context);
+    print('Range ${dataCode.length.toString()}');
+    print(dataFaultCode.length.toString());
 
     return Scaffold(
 
@@ -764,9 +765,9 @@ class _NewPostRequestState extends State<NewPostRequest> {
         ),
         items: dataFaultCode.map<DropdownMenuItem<String>>((value) {
           return DropdownMenuItem<String>(value: value.id.toString(),child: Text(value.faultCode.toString()));
-      
-    }
-    ).toList(),
+
+        }
+        ).toList(),
         onChanged: (String? newValue){
           setState(() {
             dropdownValue = newValue!;

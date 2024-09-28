@@ -224,28 +224,6 @@ class CommonWidgets {
     );
   }
 
-  /*static getTimer({required int second, context}) {
-    return TweenAnimationBuilder<Duration>(
-        duration: Duration(seconds: second),
-        tween: Tween(begin: Duration(seconds: second), end: Duration.zero),
-        onEnd: () {
-          print('--------Timer ended------');
-          // Provider.of<RegisterController>(context, listen: false)
-          //     .resendSwitch(val: true);
-        },
-        builder: (BuildContext context, Duration value, Widget child) {
-          final minutes = value.inMinutes;
-          final seconds = value.inSeconds % 60;
-          return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Text('$seconds',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: ProjectResource.headerFontSize)));
-        });
-  }*/
 
   static getSubscriptionBubble() {
     return Container(

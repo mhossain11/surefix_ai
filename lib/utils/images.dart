@@ -1,9 +1,4 @@
-/*
- *
- *  @author  Md. Touhidul Islam
- *  @since 12/13/21 11:25 PM
- *
- */
+
 
 class Images {
   /* --- App Logo --- */

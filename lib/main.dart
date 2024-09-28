@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'controller/chatbox_controller.dart';
+import 'controller/postfix_controller.dart';
 import 'controller/resetpassword_controller.dart';
 import 'controller/searchhome_controller.dart';
 import 'controller/sendpin_controller.dart';
@@ -82,6 +83,8 @@ void main() async{
           create: (_) => ResetPasswordController(),
         ),ChangeNotifierProvider(
           create: (_) => ProfileController(),
+        ),ChangeNotifierProvider(
+          create: (_) => PostFixController(),
         )
       ],
       // child: DevicePreview(

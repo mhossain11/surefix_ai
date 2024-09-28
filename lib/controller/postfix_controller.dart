@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surefix_ai/models/postfixModel.dart';
 import '../helpers/ProjectResource.dart';
 import '../helpers/dialogs.dart';
 import '../helpers/snackbars.dart';
@@ -16,17 +17,18 @@ import '../models/registrationNumberModel.dart';
 import '../utils/api_urls.dart';
 import 'package:http/http.dart' as http;
 
+import '../views/Dashboard/dashboard.dart';
 import '../views/iMech_screen/requestDetails.dart';
 
 
-class RequestController extends ChangeNotifier {
+class PostFixController extends ChangeNotifier {
   bool loading = false;
   bool loadingCreate = false;
   bool loadingAdmin = false;
   bool loadingError = false;
   String? token;
   int? statusCodes;
-  ChatgtpResponseModel allChatGPTDataModel=ChatgtpResponseModel();
+  PostFixModel allChatGPTDataModel=PostFixModel();
 
   File? documentsImage;
   final List<String> selectedOption = [];
@@ -82,8 +84,8 @@ class RequestController extends ChangeNotifier {
   }
 
 
-  Future<ChatgtpResponseModel> getChatGPTData({context,registrationController,usernameController, descriptionController, titleController, makeController, modelController,
-    yearController,faultController}) async{
+  Future<void> getChatGPTData({context,registrationController,usernameController, descriptionController, titleController, makeController, modelController,
+    yearController,faultController,fixTitleController,fixDescriptionController}) async{
     loading = true;
     notifyListeners();
     SharedPreferences sp =await SharedPreferences.getInstance();
@@ -94,16 +96,18 @@ class RequestController extends ChangeNotifier {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $tokensd',
       };
-      var request = http.MultipartRequest('POST', Uri.parse(ApiEnd.imechCreateRequestUrlfull));
+      var request = http.MultipartRequest('POST', Uri.parse(ApiEnd.PostFixRequestUrlfull));
       request.fields.addAll({
-        'title':titleController.text,
-        'description':descriptionController.text,
-        'faultCode':faultController.text,
-        'model':modelController.text,
-        'make':makeController.text,
-        'yearofmake':yearController.text,
-        'commenttochatgpt': descriptionController.text,
-        'registrationnumber': registrationController.text
+        'title':titleController.text.toString(),
+        'description':descriptionController.text.toString(),
+        'faultCode':faultController.text.toString(),
+        'model':modelController.text.toString(),
+        'make':makeController.text.toString(),
+        'yearofmake':yearController.text.toString(),
+        'commenttochatgpt': descriptionController.text.toString(),
+        'registrationnumber': registrationController.text.toString(),
+        'fixTitle':fixTitleController.text.toString(),
+        'fixDescription':fixDescriptionController.text.toString(),
       });
 
       request.headers.addAll(headers);
@@ -113,7 +117,7 @@ class RequestController extends ChangeNotifier {
       }
 
       http.StreamedResponse response = await request.send();
-      var result= await response.stream.bytesToString();
+    // var result= await response.stream.bytesToString();
       print('title: ${titleController.text.toString()}');
       print('description:${descriptionController.text.toString()}');
       print('faultCode:${faultController.text.toString()}');
@@ -122,23 +126,29 @@ class RequestController extends ChangeNotifier {
       print('commenttochatgpt:${descriptionController.text.toString()}');
       print('registrationnumber:${registrationController.text.toString()}');
       print('requestFile:${documentsImage?.path.toString()}');
+      print('fixTitleController:${fixTitleController.text}');
+      print('fixDescriptionController:${fixDescriptionController.text}');
       print('request click 1');
       print(response.statusCode);
-      var data = json.decode(result);
+     // var data = json.decode(result);
       if (response.statusCode == 200) {
         notifyListeners();
         loading = false;
 
         print('chatgpt data');
-        allChatGPTDataModel = ChatgtpResponseModel.fromJson(data);
-        /*ProjectResource.showToast(
+       // allChatGPTDataModel = PostFixModel.fromJson(data);
+       /* ProjectResource.showToast(
           "Save successfully!".toString().toUpperCase(),
-          false,
-          'center');*/
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  RequestDetails(requestId: allChatGPTDataModel.success?.alldata![0].postId.toString(),
-          descriptionData:data["success"]["description"].toString() , nameData: data["success"]["title"].toString(), make: data["success"]["alldata"][0]["make"].toString(), model: data["success"]["alldata"][0]["model"].toString(), year: data["success"]["alldata"][0]["yearofmake"].toString(),)));
+          false, 'center');*/
+        AnimatedDialogs.successDialog(context,
+            title: "Save successfully!",
+            subtitle: 'Your post fix is create.',
+            buttonText: "Ok",
+            onResponse: () {
+              //RestartWidget.restartApp(context);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Dashboard()));
 
-        return allChatGPTDataModel;
+            });
       }
       else {
         print('request click 2');
@@ -149,7 +159,6 @@ class RequestController extends ChangeNotifier {
             subtitle: 'message.toString()',
             buttonText: "Ok",
             onResponse: () {
-              //RestartWidget.restartApp(context);
               Navigator.pop(context);
 
             });
@@ -164,7 +173,7 @@ class RequestController extends ChangeNotifier {
     }
 
    // notifyListeners();
-    return allChatGPTDataModel;
+   // return allChatGPTDataModel;
 
 
 

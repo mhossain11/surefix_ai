@@ -347,10 +347,9 @@ class _DashboardState extends State<Dashboard> {
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 onPressed: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=> const CreatePost()));
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PostFixScreen(tokensp: '',)));
                 },
-                child: const Text('Post Fix', style: TextStyle(color: Colors.black)),
+                child: const Text('post a fix / tip box', style: TextStyle(color: Colors.black)),
               ),
             ],
           ),
