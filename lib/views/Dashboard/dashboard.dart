@@ -63,12 +63,17 @@ class _DashboardState extends State<Dashboard> {
 
         centerTitle:false,
         backgroundColor: themeColor,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 12,),
-          child: CircleAvatar(child:CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
-          )),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 12,),
+          child: InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProfileScreen()));
+            },
+            child: const CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
+                      ),
+          ),
         ),
         title: Text(name.toString(),overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16,color: Colors.white),),
 
@@ -349,7 +354,7 @@ class _DashboardState extends State<Dashboard> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PostFixScreen(tokensp: '',)));
                 },
-                child: const Text('post a fix / tip box', style: TextStyle(color: Colors.black)),
+                child: const Text('Post a fix / tip box', style: TextStyle(color: Colors.black)),
               ),
             ],
           ),

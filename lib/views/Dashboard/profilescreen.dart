@@ -6,6 +6,7 @@ import 'package:surefix_ai/models/profilemodel.dart';
 import '../../helpers/ProjectResource.dart';
 import '../../utils/colors.dart';
 import '../../utils/images.dart';
+import '../../widget/profilefield.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -16,6 +17,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late ProfileController profileController;
+  bool userNameVisible = true;
   @override
   void initState() {
     super.initState();
@@ -40,88 +42,127 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: Image.asset(Images.backIcon,color: Colors.white,),
         ),
       ),
-      body: Center(
-        child: SizedBox(
-          child: FutureBuilder<ProfileModel>(
-            future: profileController.profileData(context: context),
-            builder: (BuildContext context,snapshot) {
-              if(snapshot.hasData){
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
+
+      body: SizedBox(
+        child: FutureBuilder<ProfileModel>(
+          future: profileController.profileData(context: context),
+          builder: (BuildContext context,snapshot) {
+            if(snapshot.hasData){
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children:[
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: NetworkImage(snapshot.data!.user!.userImage!),
+                        ),
+                      ),
+                    ),
+                      Text(
+
+                        snapshot.data!.user!.name!.toString(),
+                        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w400,color: themeColor),
+                      ),
+                    Text(
+                      snapshot.data!.user!.type!,
+                      style: const TextStyle(fontSize: 18, color: Colors.black,fontWeight:FontWeight.w400 ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Specializes in engine repairs and maintenance. Available for emergency roadside assistance.',
+                      textAlign: TextAlign.center, style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 20),
+
+                    const Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Text('User photo',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                          padding: EdgeInsets.only(left: 10.0),
+                          child: Text('User Name',style: TextStyle(fontSize: 14,color: Colors.black54,fontWeight: FontWeight.bold),),
                         )
                       ],
                     ),
+                    Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ProfileField(
+                          icon: Icons.person,
+                          hintText: snapshot.data!.user!.userName.toString() ?? "User name",
+                        ),
+                      ),
+
+                    const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 10.0),
+                          child: Text('Email',style: TextStyle(fontSize: 14,color: Colors.black54,fontWeight: FontWeight.bold),),
+                        )
+                      ],
+                    ),
+                
+                      Padding(
+                       padding: const EdgeInsets.all(10.0),
+                       child: ProfileField(
+                         icon: Icons.email,
+                         hintText: snapshot.data!.user!.email.toString(),
+                       ),
+                     ),
+                    const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 10.0),
+                          child: Text('Phone Number',style: TextStyle(fontSize: 14,color: Colors.black54,fontWeight: FontWeight.bold),),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ProfileField(
+                        icon: Icons.phone,
+                        hintText: snapshot.data!.user!.mobile.toString() ?? 'Phone Number',
+                      ),
+                    ),
+                    const SizedBox(height: 20,),
+                    
                     SizedBox(
                       width: 200,
-                      height: 200,
-                      child: const CircleAvatar(
-                        radius: 60,
-                        backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
+                      child: ElevatedButton(
+                          onPressed:() {
+
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: themeColor,
+
+                          ),
+                          child: const Text('Log out',style: TextStyle(color: Colors.white),)
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                      const Text('User name: ',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-                        Text(
-                          snapshot.data!.user!.name!.toString(),
-                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('User Level: ',
-                          style: TextStyle(fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          snapshot.data!.user!.type!,
-                          style: const TextStyle(fontSize: 18, color: Colors.black,fontWeight:FontWeight.w400 ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Specializes in engine repairs and maintenance. Available for emergency roadside assistance.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      snapshot.data!.user!.mobile == null  ? '':snapshot.data!.user!.mobile.toString(),
-                      style: const TextStyle(fontSize: 16, color: Colors.blue),
-                    ),
+                    )
+
+
+
+
+
                   ],
-                );
-              }else{
-                const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.blue,
-                  ),
-                );
-              }
-              return const Center(
+                ),
+              );
+            }else{
+              const Center(
                 child: CircularProgressIndicator(
                   color: Colors.blue,
                 ),
-              );;
-          },
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+              ),
+            );;
+        },
 
-          ),
         ),
       ),
     );

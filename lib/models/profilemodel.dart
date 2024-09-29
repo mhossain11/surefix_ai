@@ -24,7 +24,7 @@ class User {
   String? createdAt;
   String? updatedAt;
   String? type;
-  dynamic userImage;
+  String? userImage;
   dynamic mobile;
   String? userName;
   int? status;
