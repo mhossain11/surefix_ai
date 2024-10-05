@@ -16,6 +16,7 @@ import '../../../helpers/ProjectResource.dart';
 import '../../../helpers/buttons.dart';
 import '../../../helpers/common.dart';
 import '../../../helpers/shadows.dart';
+import '../../../helpers/snackbars.dart';
 import '../../../helpers/textfields.dart';
 import '../../../services/route_manager.dart';
 import '../../../services/validators.dart';
@@ -54,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    _formKey.currentState?.dispose();
     loginController.clear();
     super.dispose();
   }
@@ -67,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 //auth choices
-  getAuthField(double screenWidth, double screenHeight) {
+
     getEmailField() {
       return CustomTextField(
         controller: loginControllerVar.emailController,
@@ -76,8 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
         nextNode: loginController.passwordControllerNode,
         hint: "User name/email",
         prefixIcon: Icons.email_outlined,
-        validator: (String value) {
-          return value != null ? null : "Invalid";
+        validators: (String? value) {
+          if (value == null || value.isEmpty) {
+            return 'Email cannot be empty';
+          }
+          final RegExp emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$',);
+          if (!emailRegex.hasMatch(value)) {
+            return 'Enter a valid email';
+          }
+          return null;
         },
       );
     }
@@ -105,8 +114,20 @@ class _LoginScreenState extends State<LoginScreen> {
             loginController.passVisibleChange();
           },
         ),
-        validator: (String value) {
-          return Validators.validatePassword(value) == null ? null : "Invalid";
+        validators: (String? value) {
+            RegExp regex=RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+            if(value!.isEmpty){
+              return 'Please enter a password';
+            }
+            if(value.length<8){
+              return ("Password Must be more than 8 characters");
+            }if(!regex.hasMatch(value)){
+              return ("Password should contain upper,lower,digit and Special character ");
+            }
+
+            return null;
+
+
         },
       );
     }
@@ -130,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
 
-    //Login
+    //Button
     getLoginButton() {
       return CustomButton(
           color: themeColor,
@@ -138,6 +159,12 @@ class _LoginScreenState extends State<LoginScreen> {
             if (_formKey.currentState!.validate()) {
               loginController.userLogin(context: context);
             } else {
+              SnackBars.showSnackBar(
+                  context: context,
+                  content: 'Please provide required information!!',
+                  durationSec: 3,
+                  success: false,
+                  routeAction: null);
 
             }
           },
@@ -158,61 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 
-    return Container(
-      padding: CommonWidgets.getCommonPadding(),
-      width: ProjectResource.screenWidth,
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CommonWidgets.getGapVertical(
-                  value: ProjectResource.screenHeight * .05),
-              CommonWidgets.getGapVertical(
-                  value: ProjectResource.screenHeight * .05),
-              const Padding(
-                padding: EdgeInsets.only(left: 15.0,top: 10),
-                child: Text('Login',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-              ),
 
-              Container(height: 10,),
-              Container(
-                padding: const EdgeInsets.only(left: 10,right: 10),
-
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(height: 10,),
-                    getEmailField(),
-                    CommonWidgets.getGapVertical(
-                        value: ProjectResource.screenHeight * .025),
-                    getPasswordField(),
-                    CommonWidgets.getGapVertical(
-                        value: ProjectResource.screenHeight * .04),
-                    getForgotPassword(),
-                    CommonWidgets.getGapVertical(
-                        value: ProjectResource.screenHeight * .04),
-                    getLoginButton(),
-                    CommonWidgets.getGapVertical(
-                        value: ProjectResource.screenHeight * .04),
-
-                  ],
-                ),
-              ),
-
-              CommonWidgets.getGapVertical(
-                  value: ProjectResource.screenHeight * .05),
-              // getExploreGuest()
-            ],
-          ),
-        ),
-      )
-
-    );
-  }
 
 
   @override
@@ -231,17 +204,70 @@ class _LoginScreenState extends State<LoginScreen> {
               child: const Icon(Icons.arrow_back,color: themeColor,))
       ),
       body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
 
-                getAuthField(
-                    ProjectResource.screenWidth, ProjectResource.screenHeight),
-              ],
-            )
+
+              Container(
+                  padding: CommonWidgets.getCommonPadding(),
+                  width: ProjectResource.screenWidth,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CommonWidgets.getGapVertical(
+                            value: ProjectResource.screenHeight * .05),
+                        CommonWidgets.getGapVertical(
+                            value: ProjectResource.screenHeight * .05),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 15.0,top: 10),
+                          child: Text('Login',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+                        ),
+
+                        Container(height: 10,),
+                        Container(
+                          padding: const EdgeInsets.only(left: 10,right: 10),
+
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(height: 10,),
+                              getEmailField(),
+                              CommonWidgets.getGapVertical(
+                                  value: ProjectResource.screenHeight * .025),
+                              getPasswordField(),
+                              CommonWidgets.getGapVertical(
+                                  value: ProjectResource.screenHeight * .04),
+                              getForgotPassword(),
+                              CommonWidgets.getGapVertical(
+                                  value: ProjectResource.screenHeight * .04),
+                              getLoginButton(),
+                              CommonWidgets.getGapVertical(
+                                  value: ProjectResource.screenHeight * .04),
+
+                            ],
+                          ),
+                        ),
+
+                        CommonWidgets.getGapVertical(
+                            value: ProjectResource.screenHeight * .05),
+                        // getExploreGuest()
+                      ],
+                    ),
+                  )
+
+              )
+                ],
+              )
+            ),
           )
 
       ),

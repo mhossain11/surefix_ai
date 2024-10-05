@@ -18,7 +18,7 @@ class CustomTextField extends StatelessWidget {
   final String? hint;
   final String? label;
   final double? borderRadius;
-  final String? Function(String) validator;
+  final String? Function(String?) validators;
   final IconData? prefixIcon;
   final String? prefixText;
   final Widget? suffix;
@@ -27,7 +27,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLengths;
 
   CustomTextField(
-      {required this.validator,
+      {required this.validators,
       required this.controller,
        this.focusNode,
        this.suffix,
@@ -111,7 +111,7 @@ class CustomTextField extends StatelessWidget {
         // This optional block of code can be used to run
         // code when the user saves the form.
       },
-   //   validator: validator ?? true,
+      validator: validators ,
     );
   }
 }

@@ -160,17 +160,14 @@ class _YesMechanicState extends State<YesMechanic> {
                  // focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                   levelText: const Text('Email'),
                   validators: (String? value) {
-                    final RegExp emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$',);
-                    if (value=="") {
+                    if (value == null || value.isEmpty) {
                       return 'Email cannot be empty';
                     }
-                    // else if (!emailRegex.hasMatch(value.toString())) {
-                    //
-                    //   return 'Enter a valid email';
-                    // }
-                    else{
-                      return null;
+                    final RegExp emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$',);
+                    if (!emailRegex.hasMatch(value)) {
+                      return 'Enter a valid email';
                     }
+                    return null;
 
                   },
                 ),

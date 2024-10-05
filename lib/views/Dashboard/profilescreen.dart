@@ -4,9 +4,11 @@ import 'package:surefix_ai/controller/profile_controller.dart';
 import 'package:surefix_ai/models/profilemodel.dart';
 
 import '../../helpers/ProjectResource.dart';
+import '../../services/route_manager.dart';
 import '../../utils/colors.dart';
 import '../../utils/images.dart';
 import '../../widget/profilefield.dart';
+import '../Auth/login/login.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -132,7 +134,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 200,
                       child: ElevatedButton(
                           onPressed:() {
-
+                            Navigator.popUntil(context, (route) => false);
+                            Navigator.push(
+                                context, SlideRightRoute(page: LoginScreen()));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: themeColor,

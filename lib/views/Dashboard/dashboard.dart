@@ -354,7 +354,7 @@ class _DashboardState extends State<Dashboard> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PostFixScreen(tokensp: '',)));
                 },
-                child: const Text('Post a fix / tip box', style: TextStyle(color: Colors.black)),
+                child: const Text('Post a fix / Tip box', style: TextStyle(color: Colors.black)),
               ),
             ],
           ),

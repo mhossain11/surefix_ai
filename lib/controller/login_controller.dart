@@ -34,6 +34,7 @@ class LoginController extends ChangeNotifier {
   String? name;
   String? message;
   String? usertype;
+  String? userImage;
   static String loginUserEmail="";
   late int statusCodes;
   late Map mapResponse;
@@ -81,6 +82,7 @@ class LoginController extends ChangeNotifier {
         usertype = dataResponse['type'];
         userID = dataResponse['id'].toString();
         name = dataResponse['name'];
+        userImage = dataResponse['userImage'];
         message = mapResponse['data']["error"];
         loginUserEmail = emailController.text.toString();
 
@@ -90,6 +92,7 @@ class LoginController extends ChangeNotifier {
         prefs.setString('name', name!);
         SharedPreferences sp =await SharedPreferences.getInstance();
         sp.setString('tokenSP',token);
+        sp.setString('userImage',userImage!);
         sp.setString('UserEmail', emailController.text.toString());
         if (usertype.toString() == 'mechanic') {
           ProjectResource.showToast(
