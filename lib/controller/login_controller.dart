@@ -55,6 +55,7 @@ class LoginController extends ChangeNotifier {
     //emailController.text = "testuser@surefix_ai.com";
     //emailController.text = "mohamed@imechanic.com";
     //emailController.text = "technician1@gmail.com";
+    //passwordController.text = "Technician1@123";
     //passwordController.text = "12345678";
     //emailController.text = "";
     //passwordController.text = "";

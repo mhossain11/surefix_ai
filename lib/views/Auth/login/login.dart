@@ -25,6 +25,8 @@ import '../../../utils/images.dart';
 import '../passwordRecovery/email_verify_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

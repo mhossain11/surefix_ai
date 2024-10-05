@@ -33,6 +33,7 @@ class _DashboardState extends State<Dashboard> {
   String? userType;
   String? token;
   String? name;
+  String? userImage;
 
   @override
   void initState() {
@@ -52,6 +53,7 @@ class _DashboardState extends State<Dashboard> {
       userType = sp.getString('usertype');
       token = sp.getString('tokenSP');
       name = sp.getString('name');
+      userImage = sp.getString('userImage');
     });
   }
 
@@ -69,9 +71,9 @@ class _DashboardState extends State<Dashboard> {
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProfileScreen()));
             },
-            child: const CircleAvatar(
+            child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
+                        backgroundImage: NetworkImage(userImage!),
                       ),
           ),
         ),
