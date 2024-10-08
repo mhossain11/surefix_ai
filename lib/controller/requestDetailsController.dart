@@ -16,7 +16,7 @@ import '../helpers/snackbars.dart';
 import '../models/postresponsemodel.dart';
 import '../models/problemsolveModel.dart';
 import '../utils/api_urls.dart';
-import '../views/iMech_screen/requestDetails.dart';
+import '../views/iMech_screen/postDetails.dart';
 
 class RequestDetailsController extends ChangeNotifier{
   String? requestId;

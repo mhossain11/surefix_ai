@@ -5,7 +5,7 @@ class ProfileField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
 
-  const ProfileField({ this.icon, required this.hintText, this.obscureText = false});
+  const ProfileField({super.key,  this.icon, required this.hintText, this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {

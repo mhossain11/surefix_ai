@@ -4,6 +4,7 @@ import 'package:surefix_ai/controller/profile_controller.dart';
 import 'package:surefix_ai/models/profilemodel.dart';
 
 import '../../helpers/ProjectResource.dart';
+import '../../helpers/textformfield.dart';
 import '../../services/route_manager.dart';
 import '../../utils/colors.dart';
 import '../../utils/images.dart';
@@ -18,6 +19,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final fullNameController =TextEditingController();
+  final numberController =TextEditingController();
+  var loading =false;
   late ProfileController profileController;
   bool userNameVisible = true;
   @override
@@ -56,18 +60,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children:[
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: SizedBox(
-                        width: 200,
-                        height: 200,
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage(snapshot.data!.user!.userImage!),
-                        ),
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 100,
+                           child: Image.asset('assets/images/others/profile_circle_2.png',fit: BoxFit.cover,),
+                           // backgroundImage: NetworkImage(snapshot.data!.user!.userImage!),
+                          ),
+                          Positioned(
+                              left: 80,
+                              right: 0,
+                              bottom:-10,
+                              child: IconButton(
+                                  onPressed: (){},
+                                  icon:const Icon(Icons.add_a_photo,)))
+                        ],
                       ),
                     ),
-                      Text(
-
-                        snapshot.data!.user!.name!.toString(),
+                      Text(snapshot.data!.user!.userName.toString(),maxLines:1 ,
                         style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w400,color: themeColor),
                       ),
                     Text(
@@ -81,19 +92,103 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     const SizedBox(height: 20),
 
-                    const Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 10.0),
                           child: Text('User Name',style: TextStyle(fontSize: 14,color: Colors.black54,fontWeight: FontWeight.bold),),
-                        )
+                        ),
+                        IconButton(
+                            onPressed: (){
+                            fullNameController.text = snapshot.data!.user!.name.toString();
+                            numberController.text = snapshot.data!.user!.mobile.toString();
+
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return SizedBox(
+                                height: 150,
+                                child: AlertDialog(
+                                  title: const Center(child: Text('Update information\'s',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(left: 10.0,bottom: 5),
+                                          child: Text('User Name',style: TextStyle(fontSize: 14,color: Colors.black54,fontWeight: FontWeight.bold),),
+                                        ),
+                                        TextField(
+                                          controller:fullNameController,
+                                          keyboardType: TextInputType.text,
+                                          decoration: InputDecoration(
+                                            prefixIcon: const Icon(Icons.person),
+                                            hintText: 'Full Name',
+                                            hintStyle: const TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10.0),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.only(left: 10.0,bottom: 5),
+                                          child: Text('Phone Number',style: TextStyle(fontSize: 14,color: Colors.black54,fontWeight: FontWeight.bold),),
+                                        ),
+                                        TextField(
+                                          controller:numberController,
+                                          keyboardType: TextInputType.phone,
+                                          decoration: InputDecoration(
+                                            prefixIcon: const Icon(Icons.phone),
+                                            hintText: 'Phone Number',
+                                            hintStyle: const TextStyle(color: Colors.grey),
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10.0),
+                                            ),
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+
+                                        },
+                                        child: const Text(
+                                          'Cancel',
+                                          style:
+                                          TextStyle(color: Colors.red),
+                                        )),
+                                    TextButton(
+                                        onPressed: () {
+
+                                        },
+                                        child: const Text(
+                                          'Update',
+                                          style:
+                                          TextStyle(color: themeColor),
+                                        ))
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+
+                        }, icon: const Icon(Icons.edit))
                       ],
                     ),
                     Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.only(left: 10.0,right: 10,bottom: 10,),
                         child: ProfileField(
                           icon: Icons.person,
-                          hintText: snapshot.data!.user!.userName.toString() ?? "User name",
+                          hintText: snapshot.data!.user!.name.toString(),
                         ),
                       ),
 
@@ -129,6 +224,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     const SizedBox(height: 20,),
+
+                    SizedBox(
+                      width: 170,
+                      child: ElevatedButton(
+                          onPressed:() {
+                           // Navigator.popUntil(context, (route) => false);
+                            /*Navigator.push(
+                                context, SlideRightRoute(page: LoginScreen()));*/
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:const Color(0xFF5D88B8),
+
+                          ),
+                          child: const Text('Change Password',style: TextStyle(color: Colors.white),)
+                      ),
+                    ),
                     
                     SizedBox(
                       width: 200,

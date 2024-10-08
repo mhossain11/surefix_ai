@@ -674,7 +674,7 @@ class _NewPostRequestState extends State<NewPostRequest> {
                       ),
 
                       const SizedBox(height: 20,),
-                      const Center(child: Text('Please Upload your video and image now.\n .mp4, .jpg',
+                      const Center(child: Text('Please Upload your video or image now.\n .mp4, .jpg',
                         textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.normal,color: Colors.grey),))
                     ],
                   ),

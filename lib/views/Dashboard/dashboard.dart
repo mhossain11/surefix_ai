@@ -73,7 +73,8 @@ class _DashboardState extends State<Dashboard> {
             },
             child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(userImage!),
+                        //backgroundImage: NetworkImage(userImage!),
+              child: Image.asset('assets/images/others/imechanicLogo.png',fit: BoxFit.cover,),
                       ),
           ),
         ),

@@ -18,7 +18,7 @@ import '../utils/api_urls.dart';
 import 'package:http/http.dart' as http;
 
 import '../views/Dashboard/dashboard.dart';
-import '../views/iMech_screen/requestDetails.dart';
+import '../views/iMech_screen/postDetails.dart';
 
 
 class PostFixController extends ChangeNotifier {

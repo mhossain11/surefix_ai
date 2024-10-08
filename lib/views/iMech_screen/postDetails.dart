@@ -737,6 +737,7 @@ class _RequestDetailsState extends State<RequestDetails> {
             );
           }),
         ),
+
         floatingActionButton: Visibility(
           visible: isFabVisible,
           child: Row(

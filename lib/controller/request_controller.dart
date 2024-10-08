@@ -16,7 +16,7 @@ import '../models/registrationNumberModel.dart';
 import '../utils/api_urls.dart';
 import 'package:http/http.dart' as http;
 
-import '../views/iMech_screen/requestDetails.dart';
+import '../views/iMech_screen/postDetails.dart';
 
 
 class RequestController extends ChangeNotifier {

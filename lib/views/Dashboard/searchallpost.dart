@@ -33,7 +33,7 @@ import '../../utils/colors.dart';
 import '../../utils/images.dart';
 import '../Auth/login/login.dart';
 import '../iMech_screen/messangerscreen.dart';
-import '../iMech_screen/requestDetails.dart';
+import '../iMech_screen/postDetails.dart';
 import 'dashboard.dart';
 
 class SearchAllPost extends StatefulWidget {

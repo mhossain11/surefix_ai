@@ -9,7 +9,7 @@ import '../../helpers/ProjectResource.dart';
 import '../../models/notificationmodel.dart';
 import '../../utils/colors.dart';
 import '../../utils/images.dart';
-import '../iMech_screen/requestDetails.dart';
+import '../iMech_screen/postDetails.dart';
 
 class NotificationScreen extends StatefulWidget {
   NotificationScreen({super.key});
