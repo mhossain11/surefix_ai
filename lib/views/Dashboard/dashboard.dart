@@ -71,9 +71,10 @@ class _DashboardState extends State<Dashboard> {
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProfileScreen()));
             },
-            child: CircleAvatar(
+            child: const CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(userImage!),
+                       // backgroundImage: NetworkImage(userImage!),
+                        backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
                       ),
           ),
         ),

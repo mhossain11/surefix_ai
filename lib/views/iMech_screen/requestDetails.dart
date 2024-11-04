@@ -20,16 +20,15 @@ class RequestDetails extends StatefulWidget {
   String model;
   String year;
 
-  RequestDetails(
-      {super.key,
-      required this.requestId,
-      required this.nameData,
-      required this.descriptionData,
-        required this.make,
-        required this.model,
-        required this.year,
-
-      });
+  RequestDetails({
+    super.key,
+    required this.requestId,
+    required this.nameData,
+    required this.descriptionData,
+    required this.make,
+    required this.model,
+    required this.year,
+  });
 
   @override
   State<RequestDetails> createState() => _RequestDetailsState();
@@ -55,7 +54,6 @@ class _RequestDetailsState extends State<RequestDetails> {
   void initState() {
     shareData();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-
       setState(() {
         requestDetailsController.loading = true;
       });
@@ -223,7 +221,6 @@ class _RequestDetailsState extends State<RequestDetails> {
                                 future: requestDetailsController
                                     .userViewRequest(context: context),
                                 builder: (context, snapshot) {
-
                                   if (snapshot.hasData) {
                                     return NotificationListener<
                                         UserScrollNotification>(
@@ -243,181 +240,247 @@ class _RequestDetailsState extends State<RequestDetails> {
                                         return true;
                                       },
                                       child: ListView.builder(
-                                          itemCount: snapshot.data!.triages!.length,
+                                          itemCount:
+                                              snapshot.data!.triages!.length,
                                           itemBuilder: (context, index) {
-
                                             return InkWell(
-                                              onTap: (){
+                                              onTap: () {
                                                 setState(() {
                                                   showDialog(
                                                     context: context,
                                                     builder: (context) {
                                                       return AlertDialog(
-                                                        backgroundColor:whiteColor,
+                                                        backgroundColor:
+                                                            whiteColor,
                                                         shape: const RoundedRectangleBorder(
                                                             borderRadius:
-                                                            BorderRadius.all(Radius.circular(10.0))),
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        10.0))),
                                                         content: SizedBox(
-                                                          width: double.infinity,
+                                                          width:
+                                                              double.infinity,
                                                           height: 400,
                                                           child: Scrollbar(
-                                                            controller: scrollController,
-                                                            trackVisibility: true,
+                                                            controller:
+                                                                scrollController,
+                                                            trackVisibility:
+                                                                true,
                                                             thickness: 7,
-                                                            child: SingleChildScrollView(
-                                                              controller: scrollController,
+                                                            child:
+                                                                SingleChildScrollView(
+                                                              controller:
+                                                                  scrollController,
                                                               child: Column(
-                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
                                                                   ClipRRect(
-                                                                    borderRadius: const BorderRadius.only(
-                                                                        bottomLeft: Radius.circular(10),
-                                                                        bottomRight:Radius.circular(10),
-                                                                        topLeft: Radius.circular(10),
-                                                                        topRight: Radius.circular(10)),
-                                                                    child: Container(
-                                                                      width: 110,
-                                                                      height: 20,
-                                                                      color: const Color(0xFF685c11),
+                                                                    borderRadius: const BorderRadius
+                                                                        .only(
+                                                                        bottomLeft:
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        bottomRight:
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topLeft:
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topRight:
+                                                                            Radius.circular(10)),
+                                                                    child:
+                                                                        Container(
+                                                                      width:
+                                                                          110,
+                                                                      height:
+                                                                          20,
+                                                                      color: const Color(
+                                                                          0xFF685c11),
                                                                       //color: const Color(0xFF96482B),
-                                                                      child:
-                                                                      const Center(
-                                                                          child:
-                                                                          Text(
-                                                                            'Problem: ',
-                                                                            style: TextStyle(
-                                                                                fontWeight:
-                                                                                FontWeight
-                                                                                    .bold,
-                                                                                color: Colors
-                                                                                    .white),
-                                                                          )),
+                                                                      child: const Center(
+                                                                          child: Text(
+                                                                        'Problem: ',
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      )),
                                                                     ),
                                                                   ),
-                                                                  Text(widget.nameData,
-                                                                      style: const TextStyle(fontSize:16, color: blackColor)),
+                                                                  Text(
+                                                                      widget
+                                                                          .nameData,
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          color:
+                                                                              blackColor)),
                                                                   const Gap(10),
                                                                   ClipRRect(
                                                                     borderRadius: const BorderRadius
                                                                         .only(
                                                                         bottomLeft:
-                                                                        Radius
-                                                                            .circular(
-                                                                            10),
+                                                                            Radius.circular(
+                                                                                10),
                                                                         bottomRight:
-                                                                        Radius
-                                                                            .circular(
-                                                                            10),
-                                                                        topLeft: Radius
-                                                                            .circular(
-                                                                            10),
-                                                                        topRight: Radius
-                                                                            .circular(
-                                                                            10)),
-                                                                    child: Container(
-                                                                      width: 110,
-                                                                      height: 20,
-                                                                      color: const Color(0xFF685c11),
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topLeft:
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topRight:
+                                                                            Radius.circular(10)),
+                                                                    child:
+                                                                        Container(
+                                                                      width:
+                                                                          110,
+                                                                      height:
+                                                                          20,
+                                                                      color: const Color(
+                                                                          0xFF685c11),
                                                                       //color: const Color(0xFF96482B),
-                                                                      child:
-                                                                      const Center(
-                                                                          child:
-                                                                          Text(
-                                                                            'Description: ',
-                                                                            style: TextStyle(
-                                                                                fontWeight:
-                                                                                FontWeight
-                                                                                    .bold,
-                                                                                color: Colors
-                                                                                    .white),
-                                                                          )),
+                                                                      child: const Center(
+                                                                          child: Text(
+                                                                        'Description: ',
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      )),
                                                                     ),
                                                                   ),
-                                                                  Text(widget.descriptionData,
-                                                                      style: const TextStyle(fontSize:16, color: blackColor)),
+                                                                  Text(
+                                                                      widget
+                                                                          .descriptionData,
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          color:
+                                                                              blackColor)),
                                                                   const Gap(10),
                                                                   Center(
-                                                                    child: ClipRRect(
-                                                                      borderRadius: const BorderRadius.only(
-                                                                          bottomLeft: Radius.circular(5),
-                                                                          bottomRight: Radius.circular(5),
-                                                                          topLeft: Radius.circular(5),
-                                                                          topRight: Radius.circular(5)),
-                                                                      child: Container(
-                                                                        width: 140,
-                                                                        height: 20,
+                                                                    child:
+                                                                        ClipRRect(
+                                                                      borderRadius: const BorderRadius
+                                                                          .only(
+                                                                          bottomLeft: Radius.circular(
+                                                                              5),
+                                                                          bottomRight: Radius.circular(
+                                                                              5),
+                                                                          topLeft: Radius.circular(
+                                                                              5),
+                                                                          topRight:
+                                                                              Radius.circular(5)),
+                                                                      child:
+                                                                          Container(
+                                                                        width:
+                                                                            140,
+                                                                        height:
+                                                                            20,
                                                                         color: const Color(
                                                                             0xFF681128),
                                                                         //color: const Color(0xFF96482B),
-                                                                        child:
-                                                                        const Center(
-                                                                            child:
-                                                                            Text("Car Information",
-                                                                              style: TextStyle(
-                                                                                  fontWeight:
-                                                                                  FontWeight
-                                                                                      .bold,
-                                                                                  color: Colors
-                                                                                      .white),
-                                                                            )),
+                                                                        child: const Center(
+                                                                            child: Text(
+                                                                          "Car Information",
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.white),
+                                                                        )),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                   const Gap(10),
                                                                   Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceAround,
                                                                     children: [
-                                                                      Row(children: [
-                                                                        const Text('Make:',style: TextStyle(fontSize:16,fontWeight: FontWeight.bold, color: blackColor)),
-                                                                        const Gap(5),
-                                                                        Text(widget.make,
-                                                                            style: const TextStyle(fontSize:16, color: blackColor)),
-                                                                      ],),
-                                                                      const Gap(10),
-                                                                      Row(children: [
-                                                                        const Text('Model:',style: TextStyle(fontSize:16,fontWeight: FontWeight.bold, color: blackColor)),
-                                                                        const Gap(10),
-                                                                        Text(widget.model,
-                                                                            style: const TextStyle(fontSize:16, color: blackColor)),
-                                                                      ],),
+                                                                      Row(
+                                                                        children: [
+                                                                          const Text(
+                                                                              'Make:',
+                                                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: blackColor)),
+                                                                          const Gap(
+                                                                              5),
+                                                                          Text(
+                                                                              widget.make,
+                                                                              style: const TextStyle(fontSize: 16, color: blackColor)),
+                                                                        ],
+                                                                      ),
+                                                                      const Gap(
+                                                                          10),
+                                                                      Row(
+                                                                        children: [
+                                                                          const Text(
+                                                                              'Model:',
+                                                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: blackColor)),
+                                                                          const Gap(
+                                                                              10),
+                                                                          Text(
+                                                                              widget.model,
+                                                                              style: const TextStyle(fontSize: 16, color: blackColor)),
+                                                                        ],
+                                                                      ),
                                                                     ],
                                                                   ),
                                                                   const Gap(6),
                                                                   Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
                                                                     children: [
-                                                                    const Text('Year:',style: TextStyle(fontSize:16,fontWeight: FontWeight.bold, color: blackColor)),
-                                                                    const Gap(10),
-                                                                    Text(widget.year,
-                                                                        style: const TextStyle(fontSize:16, color: blackColor)),
-                                                                  ],),
+                                                                      const Text(
+                                                                          'Year:',
+                                                                          style: TextStyle(
+                                                                              fontSize: 16,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: blackColor)),
+                                                                      const Gap(
+                                                                          10),
+                                                                      Text(
+                                                                          widget
+                                                                              .year,
+                                                                          style: const TextStyle(
+                                                                              fontSize: 16,
+                                                                              color: blackColor)),
+                                                                    ],
+                                                                  ),
                                                                   const Gap(10),
                                                                   Center(
-                                                                    child: ClipRRect(
-                                                                      borderRadius: const BorderRadius.only(
-                                                                          bottomLeft: Radius.circular(5),
-                                                                          bottomRight: Radius.circular(5),
-                                                                          topLeft: Radius.circular(5),
-                                                                          topRight: Radius.circular(5)
-                                                                      ),
-                                                                      child: Container(
-                                                                        width: 150,
-                                                                        height: 20,
+                                                                    child:
+                                                                        ClipRRect(
+                                                                      borderRadius: const BorderRadius
+                                                                          .only(
+                                                                          bottomLeft: Radius.circular(
+                                                                              5),
+                                                                          bottomRight: Radius.circular(
+                                                                              5),
+                                                                          topLeft: Radius.circular(
+                                                                              5),
+                                                                          topRight:
+                                                                              Radius.circular(5)),
+                                                                      child:
+                                                                          Container(
+                                                                        width:
+                                                                            150,
+                                                                        height:
+                                                                            20,
                                                                         color: const Color(
                                                                             0xFF681128),
                                                                         //color: const Color(0xFF96482B),
-                                                                        child:
-                                                                        const Center(
-                                                                            child:
-                                                                            Text("Problem Solution",
-                                                                              style: TextStyle(
-                                                                                  fontWeight:
-                                                                                  FontWeight
-                                                                                      .bold,
-                                                                                  color: Colors
-                                                                                      .white),
-                                                                            )),
+                                                                        child: const Center(
+                                                                            child: Text(
+                                                                          "Problem Solution",
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.white),
+                                                                        )),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -426,105 +489,119 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                                     borderRadius: const BorderRadius
                                                                         .only(
                                                                         bottomLeft:
-                                                                        Radius
-                                                                            .circular(
-                                                                            10),
+                                                                            Radius.circular(
+                                                                                10),
                                                                         bottomRight:
-                                                                        Radius
-                                                                            .circular(
-                                                                            10),
-                                                                        topLeft: Radius
-                                                                            .circular(
-                                                                            10),
-                                                                        topRight: Radius
-                                                                            .circular(
-                                                                            10)),
-                                                                    child: Container(
-                                                                      width: 110,
-                                                                      height: 20,
-                                                                      color: const Color(0xFF685c11),
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topLeft:
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topRight:
+                                                                            Radius.circular(10)),
+                                                                    child:
+                                                                        Container(
+                                                                      width:
+                                                                          110,
+                                                                      height:
+                                                                          20,
+                                                                      color: const Color(
+                                                                          0xFF685c11),
                                                                       //color: const Color(0xFF96482B),
-                                                                      child:
-                                                                       Center(
-                                                                          child:
-                                                                          Text(
-                                                                            'Fix:${(index + 1).toString()} ',
-                                                                            style: const TextStyle(
-                                                                                fontWeight:
-                                                                                FontWeight
-                                                                                    .bold,
-                                                                                color: Colors
-                                                                                    .white),
-                                                                          )),
+                                                                      child: Center(
+                                                                          child: Text(
+                                                                        'Fix:${(index + 1).toString()} ',
+                                                                        style: const TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      )),
                                                                     ),
                                                                   ),
-                                                                  Text(snapshot.data!.triages![index].description.toString(),
-                                                                      style: const TextStyle(fontSize:16, color: blackColor)),
+                                                                  Text(
+                                                                      snapshot
+                                                                          .data!
+                                                                          .triages![
+                                                                              index]
+                                                                          .possibleissue
+                                                                          .toString(),
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          color:
+                                                                              blackColor)),
                                                                   const Gap(10),
                                                                   ClipRRect(
                                                                     borderRadius: const BorderRadius
                                                                         .only(
                                                                         bottomLeft:
-                                                                        Radius
-                                                                            .circular(
-                                                                            10),
+                                                                            Radius.circular(
+                                                                                10),
                                                                         bottomRight:
-                                                                        Radius
-                                                                            .circular(
-                                                                            10),
-                                                                        topLeft: Radius
-                                                                            .circular(
-                                                                            10),
-                                                                        topRight: Radius
-                                                                            .circular(
-                                                                            10)),
-                                                                    child: Container(
-                                                                      width: 110,
-                                                                      height: 20,
-                                                                      color: const Color(0xFF685c11),
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topLeft:
+                                                                            Radius.circular(
+                                                                                10),
+                                                                        topRight:
+                                                                            Radius.circular(10)),
+                                                                    child:
+                                                                        Container(
+                                                                      width:
+                                                                          110,
+                                                                      height:
+                                                                          20,
+                                                                      color: const Color(
+                                                                          0xFF685c11),
                                                                       //color: const Color(0xFF96482B),
-                                                                      child:
-                                                                      const Center(
-                                                                          child:
-                                                                          Text(
-                                                                            'Solution: ',
-                                                                            style: TextStyle(
-                                                                                fontWeight:
-                                                                                FontWeight
-                                                                                    .bold,
-                                                                                color: Colors
-                                                                                    .white),
-                                                                          )),
+                                                                      child: const Center(
+                                                                          child: Text(
+                                                                        'Solution: ',
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      )),
                                                                     ),
                                                                   ),
-                                                                  Text(snapshot.data!.triages![index].description.toString(),
-                                                                      style: const TextStyle(fontSize:16, color: blackColor)),
+                                                                  Text(
+                                                                      snapshot
+                                                                          .data!
+                                                                          .triages![
+                                                                              index]
+                                                                          .description
+                                                                          .toString(),
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          color:
+                                                                              blackColor)),
                                                                   const Gap(10),
                                                                   Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .end,
                                                                     children: [
                                                                       Padding(
-                                                                        padding: const EdgeInsets.only(right: 10.0),
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            right:
+                                                                                10.0),
                                                                         child: SizedBox(
-                                                                          width: 100,
-                                                                          height: 30,
-                                                                          child: ElevatedButton(
-                                                                              style: ElevatedButton.styleFrom(
-                                                                                  backgroundColor:  const Color(
-                                                                                      0xFF681128)),
-                                                                              onPressed: () {
-                                                                              Navigator.of(context).pop();
-                                                                              },
-                                                                              child: const Text(
-                                                                                'cancel',
-                                                                                style:
-                                                                                TextStyle(color: Colors.white),
-                                                                              ))
-                                                                        ),
+                                                                            width: 100,
+                                                                            height: 30,
+                                                                            child: ElevatedButton(
+                                                                                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF681128)),
+                                                                                onPressed: () {
+                                                                                  Navigator.of(context).pop();
+                                                                                },
+                                                                                child: const Text(
+                                                                                  'cancel',
+                                                                                  style: TextStyle(color: Colors.white),
+                                                                                ))),
                                                                       ),
                                                                     ],
                                                                   )
-                                                                                                                        
                                                                 ],
                                                               ),
                                                             ),
@@ -533,7 +610,6 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                       );
                                                     },
                                                   );
-
                                                 });
                                               },
                                               child: Stack(
@@ -559,8 +635,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                                       .isSolution ==
                                                                   0
                                                               ? themeColor
-                                                              : Colors
-                                                                  .green.shade500,
+                                                              : Colors.green
+                                                                  .shade500,
                                                           // border: Border.all(width: 1, color: Colors.grey),
 
                                                           borderRadius:
@@ -568,8 +644,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                                   .circular(6)),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(
-                                                                10.0),
+                                                            const EdgeInsets
+                                                                .all(10.0),
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -582,13 +658,11 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                               borderRadius: const BorderRadius
                                                                   .only(
                                                                   bottomLeft:
-                                                                      Radius
-                                                                          .circular(
-                                                                              10),
-                                                                  bottomRight:
-                                                                      Radius
-                                                                          .circular(
-                                                                              10),
+                                                                      Radius.circular(
+                                                                          10),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          10),
                                                                   topLeft: Radius
                                                                       .circular(
                                                                           10),
@@ -636,13 +710,11 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                               borderRadius: const BorderRadius
                                                                   .only(
                                                                   bottomLeft:
-                                                                      Radius
-                                                                          .circular(
-                                                                              10),
-                                                                  bottomRight:
-                                                                      Radius
-                                                                          .circular(
-                                                                              10),
+                                                                      Radius.circular(
+                                                                          10),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          10),
                                                                   topLeft: Radius
                                                                       .circular(
                                                                           10),
@@ -672,8 +744,23 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                             const SizedBox(
                                                               height: 2,
                                                             ),
-                                                            Text(snapshot.data!.triages![index].description!.toString(),overflow: TextOverflow.ellipsis,style: const TextStyle(fontWeight:
-                                                            FontWeight.normal, color: Colors.white),)
+                                                            Text(
+                                                              snapshot
+                                                                  .data!
+                                                                  .triages![
+                                                                      index]
+                                                                  .description!
+                                                                  .toString(),
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  color: Colors
+                                                                      .white),
+                                                            )
                                                           ],
                                                         ),
                                                       ),
@@ -700,7 +787,8 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                                         true)
                                                             ? true
                                                             : false,
-                                                        activeColor: Colors.blue,
+                                                        activeColor:
+                                                            Colors.blue,
                                                         side: const BorderSide(
                                                           color: Colors.white,
                                                           width: 1.5,
@@ -708,10 +796,29 @@ class _RequestDetailsState extends State<RequestDetails> {
                                                         onChanged: (onChanged) {
                                                           setState(() {
                                                             //&& ProjectResource.loggedIn == snapshot.data!.triages![index].c// Only Post Created user can mark as complete
-                                                            if (snapshot.data!.triages![index].isSolution == 0) {
-                                                              isChecked = !isChecked;
-                                                              currentid == snapshot.data!.triages![index].id;
-                                                              requestDetailsController.problemSolve(context: context, id: snapshot.data!.triages![index].id.toString());
+                                                            if (snapshot
+                                                                    .data!
+                                                                    .triages![
+                                                                        index]
+                                                                    .isSolution ==
+                                                                0) {
+                                                              isChecked =
+                                                                  !isChecked;
+                                                              currentid ==
+                                                                  snapshot
+                                                                      .data!
+                                                                      .triages![
+                                                                          index]
+                                                                      .id;
+                                                              requestDetailsController.problemSolve(
+                                                                  context:
+                                                                      context,
+                                                                  id: snapshot
+                                                                      .data!
+                                                                      .triages![
+                                                                          index]
+                                                                      .id
+                                                                      .toString());
                                                             }
                                                           });
                                                         }),
@@ -817,15 +924,16 @@ class _RequestDetailsState extends State<RequestDetails> {
                                       onPressed: () {
                                         if (_formKey.currentState!.validate()) {
                                           requestDetailsController
-                                              .addSolutionApis(context: context);
+                                              .addSolutionApis(
+                                                  context: context);
                                         }
                                       },
                                       child: requestDetailsController.loading ==
                                               false
                                           ? const Text(
                                               'Submit',
-                                              style:
-                                                  TextStyle(color: Colors.white),
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             )
                                           : const CircularProgressIndicator(
                                               color: Colors.white,
@@ -871,5 +979,4 @@ class _RequestDetailsState extends State<RequestDetails> {
           ),
         ));
   }
-
 }

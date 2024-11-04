@@ -135,8 +135,11 @@ class RequestController extends ChangeNotifier {
           "Save successfully!".toString().toUpperCase(),
           false,
           'center');*/
+        print('make1:${makeController.text.toString()}');
+        print('model1:${modelController.text.toString()}');
+        print('year1:${yearController.text.toString()}');
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>  RequestDetails(requestId: allChatGPTDataModel.success?.alldata![0].postId.toString(),
-          descriptionData:data["success"]["description"].toString() , nameData: data["success"]["title"].toString(), make: data["success"]["alldata"][0]["make"].toString(), model: data["success"]["alldata"][0]["model"].toString(), year: data["success"]["alldata"][0]["yearofmake"].toString(),)));
+          descriptionData:data["success"]["description"].toString() , nameData: data["success"]["title"].toString(), make: makeController.text.toString(), model: modelController.text.toString(), year: yearController.text.toString(),)));
 
         return allChatGPTDataModel;
       }

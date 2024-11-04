@@ -54,14 +54,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children:[
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
                       child: SizedBox(
                         width: 200,
                         height: 200,
                         child: CircleAvatar(
                           radius: 50,
-                          backgroundImage: NetworkImage(snapshot.data!.user!.userImage!),
+                         // backgroundImage: NetworkImage(snapshot.data!.user!.userImage!),
+                          backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
                         ),
                       ),
                     ),
