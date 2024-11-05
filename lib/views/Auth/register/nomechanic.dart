@@ -274,7 +274,7 @@ class _NoMechanicState extends State<NoMechanic> {
                 ),
                 Visibility(
                     visible: isUsernameVisible,
-                    child: openCustomText('User names can incorporate spaces, numbers, and certain special characters such as periods(.), hyphens(-), apostrophes(\'), underscores(_) sign. Examples of usernames include johndoe, jdoe65, jdlovestofish, alwayssunnyinphilly')
+                    child: openCustomText('User names can be your email or a unique name not already in use')
                 ),
 
 
@@ -338,7 +338,7 @@ class _NoMechanicState extends State<NoMechanic> {
                 ),
                 Visibility(
                     visible: isPassVisible,
-                    child: openCustomText('Passwords should contain at least 1 uppercase letter,1 lowercase letter and 1 numerical character and also Symbol characters are encouraged (e.g. Harry@12)')),
+                    child: openCustomText('Password should contain minimum 8 characters with  capital letter, lowercase, number and symbol.')),
                 const SizedBox(height: 10,),
                 SizedBox(
                   child: TextFormFields(

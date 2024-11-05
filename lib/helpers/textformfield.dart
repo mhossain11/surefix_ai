@@ -41,7 +41,7 @@ class TextFormFields extends StatelessWidget{
       maxLines: maxLines,
       keyboardType: keyboardType,
       cursorColor: cursorColor,
-      enableInteractiveSelection: false,
+      enableInteractiveSelection: true,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: hintStyle,

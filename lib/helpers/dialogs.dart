@@ -574,19 +574,19 @@ class AnimatedDialogs {
             backgroundColor: white,
             title: Text(
               title,
-              style: TextStyle(color: black),
+              style: const TextStyle(color: black),
             ),
             content: Text(
               subtitle,
-              style: TextStyle(color: colorSubtitle),
+              style: const TextStyle(color: colorSubtitle),
             ),
-            actions: <Widget>[
-              TextButton(
-                  style: TextButton.styleFrom(backgroundColor: colorTheme),
-                  onPressed: () => onResponse(),
+            actions:[
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: colorTheme),
+                  onPressed:onResponse,
                   child: Text(
                     buttonText,
-                    style: TextStyle(color: white),
+                    style: const TextStyle(color: white),
                   )),
             ],
           ),

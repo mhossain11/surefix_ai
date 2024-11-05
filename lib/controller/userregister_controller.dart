@@ -22,6 +22,7 @@ import 'package:http/http.dart' as http;
 import '../helpers/ProjectResource.dart';
 import '../models/usernameModel.dart';
 import '../models/userregisterModel.dart';
+import '../views/Auth/login/login.dart';
 import '../views/Auth/register/registerpage.dart';
 
 
@@ -108,7 +109,7 @@ class UserRegisterController extends ChangeNotifier {
             buttonText: "Ok",
             onResponse: () {
               //RestartWidget.restartApp(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterPage()));
+              Navigator.pop(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
             });
 
       }else{

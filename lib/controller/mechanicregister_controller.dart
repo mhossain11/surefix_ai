@@ -20,6 +20,7 @@ import '../models/multidropdownModel.dart';
 import '../models/usernameModel.dart';
 import '../services/network_manager.dart';
 import '../utils/api_urls.dart';
+import '../views/Auth/login/login.dart';
 import '../views/Auth/register/registerpage.dart';
 
 
@@ -28,7 +29,7 @@ class  MechanicRegisterController extends ChangeNotifier {
   late int statusCodes;
 
   bool loading = false;
-
+  MechanicRegisterModel mechanicRegisterModel =MechanicRegisterModel();
   final MultiSelectController controller = MultiSelectController();
   final TextEditingController specialistController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
@@ -52,6 +53,14 @@ class  MechanicRegisterController extends ChangeNotifier {
     loading = false;
     image = null;
     profileImage=null;
+    controller.clearAllSelection();
+    specialistController.clear();
+    fullNameController.clear();
+    userNameController.clear();
+    emailAddressController.clear();
+    numberController.clear();
+    passwordController.clear();
+    conformPasswordController.clear();
   }
 
 
@@ -64,11 +73,6 @@ class  MechanicRegisterController extends ChangeNotifier {
     bool internetOn = await ProjectResource.internetConnection();
 
    if(internetOn){
-     var headers= {
-       'Connection': 'keep-alive',
-       'Accept': '*/*',
-       'Accept-Encoding':'gzip, deflate, br'
-     };
      var request =http.MultipartRequest('POST', Uri.parse(ApiEnd.imechmechanicRegisterUrlfull));
      request.fields.addAll(
          {
@@ -100,6 +104,8 @@ class  MechanicRegisterController extends ChangeNotifier {
        request.files.add(await http.MultipartFile.fromPath(
            'userImage', profileImage!.path.toString()));
      }
+
+     // Send the request and get the streamed response
      http.StreamedResponse response = await request.send();
 
 
@@ -113,24 +119,26 @@ class  MechanicRegisterController extends ChangeNotifier {
      print('fullName:${fullNameController.text.toString()}');
      print('userName:${userNameController.text.toString()}');
      print('number:${numberController.text.toString()}');*/
+
+     print(response.statusCode);
      if (response.statusCode == 200) {
        loading = false;
-
-       // mechanicRegisterModel = MechanicRegisterModel.fromJson(response);
-       AnimatedDialogs.successDialog(context,
+       AnimatedDialogs.successDialog(
+           context,
            title: "Registration",
            subtitle: "Registration Complete,you will receive an email once access has been approved",
            buttonText: "Ok",
            onResponse: () {
              // RestartWidget.restartApp(context);
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterPage()));
-           });
+             print('click button');
+         Navigator.pop(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+       });
    }else{
        notifyListeners();
        loading = false;
        SnackBars.showSnackBar(
            context: context,
-           content: "Something went wrong",
+           content:'Something is wrong',
            durationSec: 3,
            success: false,
            routeAction: null);
