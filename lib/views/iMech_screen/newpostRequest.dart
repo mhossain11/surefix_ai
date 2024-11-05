@@ -563,13 +563,13 @@ class _NewPostRequestState extends State<NewPostRequest> {
                     setState(() {
                       typeAheadController.text = value.faultCode.toString();
                       int index = int.parse(value.id.toString());
-                      print('typeAheadController:${typeAheadController.text}');
+                    //  print('typeAheadController:${typeAheadController.text}');
                       if(typeAheadController.text.isEmpty){
                         titleController.clear();
                       }else{
-                        print(index.toString());
+                      //  print(index.toString());
                         titleController.text =  dataCode[index].title.toString();
-                        print(dataCode[index].title.toString());
+                      //  print(dataCode[index].title.toString());
                       }
 
 
@@ -646,7 +646,7 @@ class _NewPostRequestState extends State<NewPostRequest> {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
-                child: Text('Upload photos / video',style: TextStyle(fontWeight:FontWeight.bold),),
+                child: Text('Upload photos or video',style: TextStyle(fontWeight:FontWeight.bold),),
               ),
             ],),
             Padding(
@@ -674,7 +674,7 @@ class _NewPostRequestState extends State<NewPostRequest> {
                       ),
 
                       const SizedBox(height: 20,),
-                      const Center(child: Text('Please Upload your video and image now.\n .mp4, .jpg',
+                      const Center(child: Text('Please Upload your video or image now.\n .mp4, .jpg',
                         textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.normal,color: Colors.grey),))
                     ],
                   ),
@@ -773,9 +773,6 @@ class _NewPostRequestState extends State<NewPostRequest> {
             dropdownValue = newValue!;
             int index = int.parse(newValue);
             titleController.text =  dataCode[index].title.toString();
-
-            print(dataCode.length);
-            print(titleController.text.toString());
           });
 
         });

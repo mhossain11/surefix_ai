@@ -376,7 +376,7 @@ class _YesMechanicState extends State<YesMechanic> {
                 ),
                 Visibility(
                     visible:  isSpecialistVisible,
-                    child: openCustomText('You can select highest three car names! ')),
+                    child: openCustomText('Please select the 3 makes you are most experienced  and knowledgeable on ')),
                 const SizedBox(height: 10,),
                 Stack(
                   children: [
