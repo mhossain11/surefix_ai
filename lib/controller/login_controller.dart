@@ -95,6 +95,7 @@ class LoginController extends ChangeNotifier {
         sp.setString('tokenSP',token);
         sp.setString('userImage',userImage!);
         sp.setString('UserEmail', emailController.text.toString());
+       // print('Image: ${userImage.toString()}');
         if (usertype.toString() == 'mechanic') {
           ProjectResource.showToast(
               "Signed In successfully!".toString().toUpperCase(),

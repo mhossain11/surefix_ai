@@ -24,8 +24,8 @@ class RequestController extends ChangeNotifier {
   bool loadingCreate = false;
   bool loadingAdmin = false;
   bool loadingError = false;
-  String? token;
-  int? statusCodes;
+ // String? token;
+ // int? statusCodes;
   ChatgtpResponseModel allChatGPTDataModel=ChatgtpResponseModel();
 
   File? documentsImage;

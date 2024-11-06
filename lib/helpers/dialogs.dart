@@ -580,9 +580,10 @@ class AnimatedDialogs {
               subtitle,
               style: const TextStyle(color: colorSubtitle),
             ),
+
             actions:[
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: colorTheme),
+              TextButton(
+                  style: TextButton.styleFrom(backgroundColor: colorTheme),
                   onPressed:onResponse,
                   child: Text(
                     buttonText,

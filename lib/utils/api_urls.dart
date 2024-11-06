@@ -24,6 +24,7 @@ class ApiEnd {
   static String ownpostsurl='$baseUrl/ownposts';
   static String usernamelist ='$baseUrl/regiCheckUser';
   static String userProfile ='$baseUrl/userProfile/';
+  static String updateProfile ='$baseUrl/update-profile';
   static String noticeGetUrl ='$baseUrl/notice';
   static String noticeGetUrlt ='$baseUrl/noticet';
   static String notificationGetUrl ='$baseUrl/notification';

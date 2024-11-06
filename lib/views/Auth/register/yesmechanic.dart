@@ -12,11 +12,13 @@ import 'package:provider/provider.dart';
 
 import '../../../controller/mechanicregister_controller.dart';
 import '../../../helpers/buttons.dart';
+import '../../../helpers/dialogs.dart';
 import '../../../helpers/snackbars.dart';
 import '../../../helpers/textformfield.dart';
 import '../../../models/multidropdownModel.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/images.dart';
+import '../login/login.dart';
 
 class YesMechanic extends StatefulWidget {
   const YesMechanic({super.key});
@@ -458,9 +460,7 @@ class _YesMechanicState extends State<YesMechanic> {
                Stack(
                  children: [
                    Center(
-                     child: mechanicController.image != null
-                         ? Image.file(
-                       mechanicController.image!, width: 160, height: 160, fit: BoxFit.cover,)
+                     child: mechanicController.image != null ? Image.file(mechanicController.image!, width: 160, height: 160, fit: BoxFit.cover,)
                          : const SizedBox(),
                    ),
                    Visibility(
@@ -567,6 +567,7 @@ class _YesMechanicState extends State<YesMechanic> {
                               routeAction: null);
 
                         }
+
                       },
                       fixedSize: const Size(350, 50),
                       backgroundColor: themeColor,
@@ -785,6 +786,15 @@ class _YesMechanicState extends State<YesMechanic> {
     }
 
   }
+  deletesImage() async{
+    if(mechanicController.image != null && await mechanicController.image!.exists()) {
+      await mechanicController.image!.delete();
+      setState(() {
+        mechanicController.image = null;
+      });
+
+    }
+  }
   profileImages() async{
 
     try{
@@ -807,15 +817,7 @@ class _YesMechanicState extends State<YesMechanic> {
 
     }
   }
-  deletesImage() async{
-    if(mechanicController.image != null && await mechanicController.image!.exists()) {
-      await mechanicController.image!.delete();
-      setState(() {
-        mechanicController.image = null;
-      });
 
-    }
-  }
   Widget dropDownButtons(){
     return DropdownButtonFormField(
         icon: const Icon(Icons.arrow_drop_down),

@@ -109,17 +109,6 @@ class  MechanicRegisterController extends ChangeNotifier {
      http.StreamedResponse response = await request.send();
 
 
-/*     print('yes: ${response.statusCode.toString()}');
-     print('dropdownValue:${dropdownValue.toString()}');
-     print('experienceImage:${image?.path.toString()}');
-     print('profileImage:${profileImage?.path.toString()}');
-     print('email:${emailAddressController.text.toString()}');
-     print('password:${passwordController.text.toString()}');
-     print('conformPassword:${conformPasswordController.text.toString()}');
-     print('fullName:${fullNameController.text.toString()}');
-     print('userName:${userNameController.text.toString()}');
-     print('number:${numberController.text.toString()}');*/
-
      print(response.statusCode);
      if (response.statusCode == 200) {
        loading = false;
@@ -129,9 +118,7 @@ class  MechanicRegisterController extends ChangeNotifier {
            subtitle: "Registration Complete,you will receive an email once access has been approved",
            buttonText: "Ok",
            onResponse: () {
-             // RestartWidget.restartApp(context);
-             print('click button');
-         Navigator.pop(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const LoginScreen()));
        });
    }else{
        notifyListeners();

@@ -109,7 +109,7 @@ class UserRegisterController extends ChangeNotifier {
             buttonText: "Ok",
             onResponse: () {
               //RestartWidget.restartApp(context);
-              Navigator.pop(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const LoginScreen()));
             });
 
       }else{

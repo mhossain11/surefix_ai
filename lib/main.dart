@@ -19,6 +19,7 @@ import 'controller/postfix_controller.dart';
 import 'controller/resetpassword_controller.dart';
 import 'controller/searchhome_controller.dart';
 import 'controller/sendpin_controller.dart';
+import 'controller/updateprofile_controller.dart';
 import 'controller/viewownpost_controller.dart';
 import 'controller/login_controller.dart';
 import 'controller/mechanichome_org_controller.dart';
@@ -85,6 +86,8 @@ void main() async{
           create: (_) => ProfileController(),
         ),ChangeNotifierProvider(
           create: (_) => PostFixController(),
+        ),ChangeNotifierProvider(
+          create: (_) => UpdateProfileController(),
         )
       ],
       // child: DevicePreview(

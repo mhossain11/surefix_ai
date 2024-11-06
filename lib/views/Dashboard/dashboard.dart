@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:surefix_ai/helpers/buttons.dart';
 import 'package:surefix_ai/views/Dashboard/profilescreen.dart';
 import 'package:surefix_ai/views/Dashboard/searchallpost.dart';
@@ -7,13 +7,14 @@ import 'package:surefix_ai/views/Dashboard/viewownpost.dart';
 import 'package:surefix_ai/views/iMech_screen/termsscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surefix_ai/widget/other.dart';
 
 import '../../controller/dashboard_controller.dart';
 import '../../helpers/ProjectResource.dart';
 import '../../models/bannerModel.dart';
 import '../../services/route_manager.dart';
 import '../../utils/colors.dart';
-import '../../utils/images.dart';
+import '../../widget/imagepick.dart';
 import '../Auth/login/login.dart';
 import '../iMech_screen/newpostRequest.dart';
 import 'package:badges/badges.dart' as badges;
@@ -33,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
   String? userType;
   String? token;
   String? name;
-  String? userImage;
+  String? userImage = key;
 
   @override
   void initState() {
@@ -53,12 +54,14 @@ class _DashboardState extends State<Dashboard> {
       userType = sp.getString('usertype');
       token = sp.getString('tokenSP');
       name = sp.getString('name');
-      userImage = sp.getString('userImage');
+     // userImage = sp.getString('userImage');
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
+   // print('Image2: ${userImage.toString()}');
     ProjectResource.setScreenSize(context);
     return PopScope(
       canPop: false,
@@ -78,9 +81,10 @@ class _DashboardState extends State<Dashboard> {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProfileScreen()));
               },
-              child: const CircleAvatar(
+              child:  /*Base64CircleAvatar(base64Image: userImage!,)*/
+              const CircleAvatar(
                           radius: 30,
-                         // backgroundImage: NetworkImage(userImage!),
+                        //  backgroundImage: MemoryImage(decodedBytes.nor),
                           backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
                         ),
             ),
