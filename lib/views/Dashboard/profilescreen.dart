@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:surefix_ai/controller/profile_controller.dart';
 import 'package:surefix_ai/models/profilemodel.dart';
+import 'package:surefix_ai/views/Dashboard/updateprofilescreen.dart';
 
 import '../../helpers/ProjectResource.dart';
 import '../../services/route_manager.dart';
@@ -54,6 +55,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children:[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10,top: 10),
+                          child: InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>const UpdateProfileScreen()));
+                              },
+                              child: const Icon(Icons.edit)),
+                        )
+                      ],
+                    ),
                     const Padding(
                       padding: EdgeInsets.all(10.0),
                       child: SizedBox(
@@ -61,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 200,
                         child: CircleAvatar(
                           radius: 50,
-                         // backgroundImage: NetworkImage(snapshot.data!.user!.userImage!),
+                          // backgroundImage: NetworkImage(snapshot.data!.user!.userImage!),
                           backgroundImage: AssetImage('assets/images/others/imechanicLogo.png'),
                         ),
                       ),
